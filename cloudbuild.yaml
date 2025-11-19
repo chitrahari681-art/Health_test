@@ -1,6 +1,9 @@
 options:
   logging: CLOUD_LOGGING_ONLY
 
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 steps:
   # 1. Install Sonar Scanner CLI
   - name: eclipse-temurin:17-jdk
