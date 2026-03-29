@@ -1,0 +1,6 @@
+[submodule "MyApp"]
+	path = MyApp
+	url = https://github.com/ChitraJ2193/MyApp.git
+[submodule "myapp_backend"]
+	path = myapp_backend
+	url = https://github.com/ChitraJ2193/myapp_backend.git
