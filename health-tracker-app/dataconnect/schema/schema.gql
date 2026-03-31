@@ -1,0 +1,42 @@
+type User @table {
+  displayName: String!
+  createdAt: Timestamp!
+  email: String
+  dateOfBirth: Date
+  gender: String
+}
+
+type HealthMetric @table {
+  user: User
+  metricType: String!
+  value: Float!
+  unit: String!
+  recordedAt: Timestamp!
+  notes: String
+}
+
+type Medication @table {
+  user: User
+  name: String!
+  dosage: String!
+  frequency: String!
+  instructions: String
+  startDate: Date
+  endDate: Date
+}
+
+type MedicationLog @table {
+  user: User
+  medication: Medication
+  takenAt: Timestamp!
+  notes: String
+}
+
+type Appointment @table {
+  user: User
+  title: String!
+  appointmentDateTime: Timestamp!
+  providerName: String!
+  location: String
+  notes: String
+}

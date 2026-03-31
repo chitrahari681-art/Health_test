@@ -1,0 +1,51 @@
+# 1. Query to get a user's own health metrics
+query MyHealthMetrics @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  healthMetrics(where: {userId: {eq_expr: "auth.uid"}}, orderBy: [{recordedAt: DESC}]) {
+    id
+    metricType
+    value
+    unit
+    recordedAt
+    notes
+  }
+}
+
+# 2. Mutation to add a new health metric for the current user
+mutation AddMyHealthMetric($metricType: String!, $value: Float!, $unit: String!, $recordedAt: Timestamp!) @auth(level: USER) {
+  healthMetric_insert(data: {
+    userId_expr: "auth.uid",
+    metricType: $metricType,
+    value: $value,
+    unit: $unit,
+    recordedAt: $recordedAt
+  }) {
+    id
+  }
+}
+
+# 3. Query to list a user's medications
+query MyMedications @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  medications(where: {userId: {eq_expr: "auth.uid"}}, orderBy: [{name: ASC}]) {
+    id
+    name
+    dosage
+    frequency
+    instructions
+    startDate
+    endDate
+  }
+}
+
+# 4. Mutation to create a new appointment for the current user
+mutation ScheduleMyAppointment($title: String!, $appointmentDateTime: Timestamp!, $providerName: String!, $location: String, $notes: String) @auth(level: USER) {
+  appointment_insert(data: {
+    userId_expr: "auth.uid",
+    title: $title,
+    appointmentDateTime: $appointmentDateTime,
+    providerName: $providerName,
+    location: $location,
+    notes: $notes
+  }) {
+    id
+  }
+}

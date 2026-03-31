@@ -1,0 +1,60 @@
+mutation CreateDemoData @transaction @auth(level: USER, insecureReason: "This operation is for seeding demo data and should be restricted to authenticated users.") {
+  user1: user_insert(data: {
+    id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+    displayName: "Alice Smith",
+    createdAt: "2023-01-01T10:00:00Z",
+    email: "alice@example.com",
+    dateOfBirth: "1990-05-15",
+    gender: "Female"
+  })
+  user2: user_insert(data: {
+    id: "b1f0c2d3-1e2f-3a4b-5c6d-7e8f9a0b1c2d",
+    displayName: "Bob Johnson",
+    createdAt: "2023-01-02T11:00:00Z",
+    email: "bob@example.com",
+    dateOfBirth: "1985-11-20",
+    gender: "Male"
+  })
+  medication1: medication_insert(data: {
+    id: "c2d3e4f5-5a6b-7c8d-9e0f-1a2b3c4d5e6f",
+    userId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+    name: "Aspirin",
+    dosage: "500mg",
+    frequency: "Once daily",
+    instructions: "Take with food",
+    startDate: "2023-03-01",
+    endDate: "2023-03-31"
+  })
+  medication2: medication_insert(data: {
+    id: "d3e4f5a6-b7c8-d9e0-f1a2-b3c4d5e6f7a8",
+    userId: "b1f0c2d3-1e2f-3a4b-5c6d-7e8f9a0b1c2d",
+    name: "Ibuprofen",
+    dosage: "200mg",
+    frequency: "As needed",
+    instructions: "Do not exceed 3 doses in 24 hours",
+    startDate: "2023-02-15"
+  })
+  medicationLog1: medicationLog_insert(data: {
+    medicationId: "c2d3e4f5-5a6b-7c8d-9e0f-1a2b3c4d5e6f",
+    userId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+    takenAt: "2023-03-01T12:00:00Z",
+    notes: "Taken with breakfast."
+  })
+  healthMetric1: healthMetric_insert(data: {
+    id: "e4f5a6b7-c8d9-e0f1-a2b3-c4d5e6f7a8b9",
+    userId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+    metricType: "Weight",
+    value: 65.2,
+    unit: "kg",
+    recordedAt: "2023-04-01T08:00:00Z"
+  })
+  appointment1: appointment_insert(data: {
+    id: "f5a6b7c8-d9e0-f1a2-b3c4-d5e6f7a8b9c0",
+    userId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+    title: "Annual Check-up",
+    appointmentDateTime: "2023-05-10T14:30:00Z",
+    providerName: "Dr. Green",
+    location: "Main Clinic",
+    notes: "Remember to bring insurance card."
+  })
+}
